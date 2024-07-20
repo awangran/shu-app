@@ -5,20 +5,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LOCAL_STORAGE_KEY = 'shu.books'
 
-function App() {
-  const [books, setBooks] = useState([])
-  const bookRef = useRef() 
+function App() { 
+  const [books, setBooks] = useState(() => {
+    const storedBooks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedBooks ? JSON.parse(storedBooks) : [];
+  });
+  const bookRef = useRef()  
 
-  useEffect(() => {
-    const storedBooks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    if (storedBooks) setBooks(prevBooks => [...prevBooks, ...storedBooks]);
-  }, [])
 
-  useEffect(() => {
+  useEffect(() => { 
     console.log(books)
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(books))
-  }, [books])
-
+  }, [books]) 
+ 
   function handleAdd() {
     const name = bookRef.current.value
     if (name === '') return
@@ -28,14 +27,12 @@ function App() {
     bookRef.current.value = null
     }
 
-  const deleteItemById = (itemId) => {
-    const index = books.findIndex(book => book.id === itemId);
-    if (index !== -1) {
-      const newBooks = [...books.slice(0, index), ...books.slice(index + 1)];
+    const deleteItemById = (itemId) => {
+      const newBooks = books.filter(book => book.id !== itemId);
       setBooks(newBooks);
-    }
-  };
-  
+    };
+    
+   
 
   return (
     <>
