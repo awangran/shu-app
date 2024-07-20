@@ -1,6 +1,7 @@
 
 import React, {useState, useRef, useEffect, setState } from 'react';
 import Library from './Library.js'
+import './output.css';
 import { v4 as uuidv4 } from 'uuid';
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -31,17 +32,22 @@ function App() {
       const newBooks = books.filter(book => book.id !== itemId);
       setBooks(newBooks);
     };
+
+    const editName = (itemId, newName) => {
+      setBooks(books.map(book =>
+        book.id === itemId ? { ...book, name: newName } : book));
+      };
     
    
 
   return (
     <>
     <div>
-      <p>Book name: </p>
-      <input ref={bookRef} type='text'></input>
-      <button onClick={handleAdd}>Add book</button>
+      <p class="text-sky-400">Book name: </p>
+      <input className='border-2 ' ref={bookRef} type='text'></input>
+      <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={handleAdd}>Add book</button>
     </div>
-    <Library books = {books} deleteItemById = {deleteItemById} />
+    <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
     <div>{books.length} books in library</div>
     </>
     
