@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 
 export default function Book( {book, deleteBook, deleteItemById, editName} ) {
     function handleDelete() {
@@ -14,11 +14,17 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         }
     }
 
-    function handleEdit() {
-        
-        //const newName = null
+    const inputRef = useRef()
 
-        //editName(book.id, newName)
+    const handleEdit = (event) => {
+        const newName = inputRef.current.value
+
+        if (newName === '') {
+            alert('Please submit a name.')
+        } else {
+            editName(book.id, newName)
+            document.getElementById('inputId').value = ''
+        }
     }
     
   return (
@@ -28,8 +34,8 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
       <button onClick={toggleEdit} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2">edit</button>
 
       <div id="settings" className='hidden'>
-        <input className='border-2 ' type='text'></input>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2'>save</button> 
+        <input placeholder = {book.name} id="inputId" className='border-2' ref={inputRef} type='text' onfocus="this.value=''" ></input>
+        <button onClick={handleEdit} className='bg-blue-500 over:bg-blue-700 text-white py-1 px-2 rounded m-2'>save</button> 
 
         <button onClick={toggleEdit} className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2'>cancel</button> 
       </div>
