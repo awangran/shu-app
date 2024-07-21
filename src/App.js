@@ -12,7 +12,7 @@ function App() {
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
   const bookRef = useRef()  
-
+  const authorRef = useRef()
 
   useEffect(() => { 
     console.log(books)
@@ -21,11 +21,14 @@ function App() {
  
   function handleAdd() {
     const name = bookRef.current.value
+    const author = authorRef.current.value
+
     if (name === '') return
     setBooks(prevBooks => {
-      return [...prevBooks, {id: uuidv4(), name:name} ]
+      return [...prevBooks, {id: uuidv4(), name:name, author:author} ]
     });
     bookRef.current.value = null
+    authorRef.current.value = null
     }
 
     const deleteItemById = (itemId) => {
@@ -45,6 +48,10 @@ function App() {
     <div>
       <p class="text-sky-400">Book name: </p>
       <input className='border-2 ' ref={bookRef} type='text'></input>
+
+      <p class="text-sky-400">Book author: </p>
+      <input className='border-2 ' ref={authorRef} type='text'></input>
+
       <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={handleAdd}>Add book</button>
     </div>
     <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
