@@ -5,16 +5,18 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         deleteItemById(book.id)
     }
 
-    function toggleEdit() {
-        const btn = document.getElementById('settings');
+     function toggleEdit() {
+        const btn = settingRef.current
+        
         if (btn.className === "block") {
             btn.className = "hidden"
         } else {
             btn.className = "block"
         }
-    }
+    } 
 
     const inputRef = useRef()
+    const settingRef = useRef()
 
     const handleEdit = (event) => {
         const newName = inputRef.current.value
@@ -33,7 +35,7 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
       <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2" onClick={handleDelete}>delete</button>
       <button onClick={toggleEdit} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2">edit</button>
 
-      <div id="settings" className='hidden'>
+      <div ref={settingRef} className='hidden' >
         <input placeholder = {book.name} id="inputId" className='border-2' ref={inputRef} type='text' onfocus="this.value=''" ></input>
         <button onClick={handleEdit} className='bg-blue-500 over:bg-blue-700 text-white py-1 px-2 rounded m-2'>save</button> 
 
