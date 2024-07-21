@@ -15,17 +15,18 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         }
     } 
 
-    const inputRef = useRef()
+    const nameRef = useRef()
+    const authoreditRef = useRef()
     const settingRef = useRef()
 
     const handleEdit = (event) => {
-        const newName = inputRef.current.value
+        const newName = nameRef.current.value
+        const newAuthor = authoreditRef.current.value
 
-        if (newName === '') {
-            alert('Please submit a name.')
+        if (newName === ''|| newAuthor === '') {
+            alert('Please dont leave blanks.')
         } else {
-            editName(book.id, newName)
-            document.getElementById('inputId').value = ''
+            editName(book.id, newName, newAuthor)
         }
     }
     
@@ -36,8 +37,16 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
       <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2" onClick={handleDelete}>delete</button>
       <button onClick={toggleEdit} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2">edit</button>
 
-      <div ref={settingRef} className='hidden' >
-        <input placeholder = {book.name} id="inputId" className='border-2' ref={inputRef} type='text' onFocus="this.value=''" ></input>
+      <div ref={settingRef} className='block' >
+        <label>name:</label>
+        <input defaultValue = {book.name} className='border-2' ref={nameRef} type='text'  ></input>
+        
+        <label>author:</label>
+        <input defaultValue = {book.author} className='border-2' ref={authoreditRef} type='text' ></input>
+
+
+        
+        
         <button onClick={handleEdit} className='bg-blue-500 over:bg-blue-700 text-white py-1 px-2 rounded m-2'>save</button> 
 
         <button onClick={toggleEdit} className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2'>cancel</button> 

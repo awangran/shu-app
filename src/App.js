@@ -13,9 +13,10 @@ function App() {
   });
   const bookRef = useRef()  
   const authorRef = useRef()
+  console.log(books)
+
 
   useEffect(() => { 
-    console.log(books)
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(books))
   }, [books]) 
  
@@ -36,9 +37,9 @@ function App() {
       setBooks(newBooks);
     };
 
-    const editName = (itemId, newName) => {
+    const editName = (itemId, newName, newAuthor) => {
       setBooks(books.map(book =>
-        book.id === itemId ? { ...book, name: newName } : book));
+        book.id === itemId ? { ...book, name: newName, author: newAuthor} : book));
       };
     
    
@@ -46,10 +47,10 @@ function App() {
   return (
     <>
     <div>
-      <p class="text-sky-400">Book name: </p>
+      <p className="text-sky-400">Book name: </p>
       <input className='border-2 ' ref={bookRef} type='text'></input>
 
-      <p class="text-sky-400">Book author: </p>
+      <p className="text-sky-400">Book author: </p>
       <input className='border-2 ' ref={authorRef} type='text'></input>
 
       <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={handleAdd}>Add book</button>
