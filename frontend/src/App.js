@@ -1,9 +1,10 @@
 
 import React, {useState, useRef, useEffect, setState } from 'react';
 import Library from './Library.js'
-import FileUpload from './FileUpload.js';
 import './output.css';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
 
 const LOCAL_STORAGE_KEY = 'shu.books'
 
@@ -12,6 +13,9 @@ function App() {
     const storedBooks = localStorage.getItem(LOCAL_STORAGE_KEY);
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
+  const [file, setFile] = useState(null);
+  const  [customId, setCustomId] = useState('')
+
   const bookRef = useRef()  
   const authorRef = useRef()
   const typeRef = useRef()
@@ -25,8 +29,38 @@ function App() {
   useEffect(() => { 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(books))
   }, [books]) 
- 
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleIdChange = (id) => {
+    setCustomId(id);
+    };
+
+  
+  const handleSubmit = async (e) => {
+    //e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('id', customId);
+    try {
+        await axios.post('http://localhost:5000/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        alert('File name ' + {customId} + 'uploaded successfully');
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        alert('Failed to upload file');
+    }
+};
+
+
+  
   function handleAdd() {
+    const id = uuidv4()
     const name = bookRef.current.value
     const author = authorRef.current.value
     const type = typeRef.current.value
@@ -36,18 +70,25 @@ function App() {
 
     if (name === '') return
     setBooks(prevBooks => {
-      return [...prevBooks, {id: uuidv4(), name:name, author:author, type:type, genre:genre, status:status, rating:rating} ]
+      return [...prevBooks, {id: id, name:name, author:author, type:type, genre:genre, status:status, rating:rating} ]
     });
+
+    handleIdChange(id);
+
+    handleSubmit();
+
     bookRef.current.value = null
     authorRef.current.value = null
     ratingRef.current.value = null
-    
-
-
-
-    
+   
     };
 
+    //mondongo file upload handlrerr
+
+    
+    
+
+  //deleteand edit localstorage info
     const deleteItemById = (itemId) => {
       const newBooks = books.filter(book => book.id !== itemId);
       setBooks(newBooks);
@@ -64,7 +105,13 @@ function App() {
   return (
     <>
     <div>
-      <FileUpload />
+    <form>
+        <div>
+            <label htmlFor="file">File:</label>
+            <input type="file" id="file" onChange={handleFileChange} required />
+        </div>
+    </form>
+
       <label className="text-sky-400">Name: </label>
       <input className='border-2 ' ref={bookRef} type='text'></input>
 

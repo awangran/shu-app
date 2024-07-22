@@ -5,9 +5,20 @@ const path = require('path');
 const Grid = require('gridfs-stream');
 const crypto = require('crypto');
 const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
+const cors = require('cors');
 
 const app = express();
 const PORT = 5000;
+
+// Middleware to parse JSON bodies and handle CORS
+app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow only requests from this origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true // Allow cookies to be sent
+  }));
+  
+
 
 // MongoDB connection
 const mongoURI = 'mongodb+srv://awangran:shuapp@shu.jjglqac.mongodb.net/?retryWrites=true&w=majority&appName=shu';
