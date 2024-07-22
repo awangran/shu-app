@@ -7,12 +7,7 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
 
      function toggleEdit() {
         const btn = settingRef.current
-        
-        if (btn.className === "block") {
-            btn.className = "hidden"
-        } else {
-            btn.className = "block"
-        }
+        btn.className = (btn.className === "block") ? "hidden" : "block";
     } 
 
     const nameRef = useRef()
@@ -35,6 +30,7 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         if (newName === ''|| newAuthor === '') {
             alert('Please dont leave blanks.')
         } else {
+            alert('Edited')
             editName(book.id, newName, newAuthor, newType, newGenre, newStatus, newRating)
         }
     }
