@@ -1,6 +1,7 @@
 
 import React, {useState, useRef, useEffect, setState } from 'react';
 import Library from './Library.js'
+import FileUpload from './FileUpload.js';
 import './output.css';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -41,7 +42,11 @@ function App() {
     authorRef.current.value = null
     ratingRef.current.value = null
     
-    }
+
+
+
+    
+    };
 
     const deleteItemById = (itemId) => {
       const newBooks = books.filter(book => book.id !== itemId);
@@ -59,6 +64,7 @@ function App() {
   return (
     <>
     <div>
+      <FileUpload />
       <label className="text-sky-400">Name: </label>
       <input className='border-2 ' ref={bookRef} type='text'></input>
 
