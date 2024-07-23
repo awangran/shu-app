@@ -13,8 +13,7 @@ function App() {
     const storedBooks = localStorage.getItem(LOCAL_STORAGE_KEY);
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
-  const [file, setFile] = useState(null);
-  const  [customId, setCustomId] = useState('')
+  const [file, setFile] = useState();
 
   const bookRef = useRef()  
   const authorRef = useRef()
@@ -30,32 +29,7 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(books))
   }, [books]) 
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
 
-  const handleIdChange = (id) => {
-    setCustomId(id);
-    };
-
-  
-  const handleSubmit = async (e) => {
-    //e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('id', customId);
-    try {
-        await axios.post('http://localhost:5000/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        alert('File name ' + {customId} + 'uploaded successfully');
-    } catch (error) {
-        console.error('Error uploading file:', error);
-        alert('Failed to upload file');
-    }
-};
 
 
   
@@ -73,17 +47,21 @@ function App() {
       return [...prevBooks, {id: id, name:name, author:author, type:type, genre:genre, status:status, rating:rating} ]
     });
 
-    handleIdChange(id);
-
-    handleSubmit();
 
     bookRef.current.value = null
     authorRef.current.value = null
     ratingRef.current.value = null
    
     };
+//  upload file and send data to server
 
-    //mondongo file upload handlrerr
+    const upload = () => {
+      const formData = new FormData()
+      formData.append('file', file)
+      axios.post('http://localhost:3001/upload', formData)
+      .then( res => {})
+      .catch( er => console.log(er))
+    } 
 
     
     
@@ -105,12 +83,8 @@ function App() {
   return (
     <>
     <div>
-    <form>
-        <div>
-            <label htmlFor="file">File:</label>
-            <input type="file" id="file" onChange={handleFileChange} required />
-        </div>
-    </form>
+      <input type="file" onChange={(e) => setFile(e.target.files[0])}></input>
+      <button type="button" onClick={upload}>upload</button>
 
       <label className="text-sky-400">Name: </label>
       <input className='border-2 ' ref={bookRef} type='text'></input>
