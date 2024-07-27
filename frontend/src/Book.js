@@ -37,7 +37,7 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
     
   return (
     <div>
-    <p>{book.name} | {book.author} | {book.type} | {book.genre} | {book.status} | {book.rating} </p>
+    <p>{book.name} | {book.author} | {book.type} | {book.genre} | {book.status} | {book.rating} | {book.image} </p>
       
       <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2" onClick={handleDelete}>delete</button>
       <button onClick={toggleEdit} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2">edit</button>

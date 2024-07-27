@@ -21,6 +21,7 @@ function App() {
   const genreRef = useRef()
   const statusRef = useRef()
   const ratingRef = useRef()
+  const imageRef = useRef()
 
   console.log(books)
 
@@ -33,7 +34,7 @@ function App() {
 
 
   
-  function handleAdd() {
+  function handleAdd(val) {
     const id = uuidv4()
     const name = bookRef.current.value
     const author = authorRef.current.value
@@ -41,16 +42,19 @@ function App() {
     const genre = Array.from(genreRef.current.selectedOptions, option => option.value)
     const status = statusRef.current.value
     const rating = ratingRef.current.value
+    const image = val
+
 
     if (name === '') return
     setBooks(prevBooks => {
-      return [...prevBooks, {id: id, name:name, author:author, type:type, genre:genre, status:status, rating:rating} ]
+      return [...prevBooks, {id: id, name:name, author:author, type:type, genre:genre, status:status, rating:rating, image:image} ]
     });
 
 
     bookRef.current.value = null
     authorRef.current.value = null
     ratingRef.current.value = null
+  
    
     };
 //  upload file and send data to server
@@ -61,6 +65,11 @@ function App() {
       axios.post('http://localhost:3001/upload', formData)
       .then( res => {})
       .catch( er => console.log(er))
+
+      const imageName = file.name
+      handleAdd(imageName)
+      const afile = document.querySelector('.file');
+      afile.value = '';
     } 
 
     
@@ -77,14 +86,14 @@ function App() {
       setBooks(books.map(book =>
         book.id === itemId ? { ...book, name: newName, author: newAuthor, type: newType, genre: newGenre, status: newStatus, rating: newRating} : book));
       };
+
     
    
 
   return (
     <>
     <div>
-      <input type="file" onChange={(e) => setFile(e.target.files[0])}></input>
-      <button type="button" onClick={upload}>upload</button>
+      <input type="file" class="file" onChange={(e) => setFile(e.target.files[0])}></input>
 
       <label className="text-sky-400">Name: </label>
       <input className='border-2 ' ref={bookRef} type='text'></input>
@@ -138,7 +147,7 @@ function App() {
 
       
 
-      <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={handleAdd}>Add book</button>
+      <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button>
     </div>
 
     <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />

@@ -16,10 +16,12 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage})
+ 
 
 app.post('/upload', upload.single('file'), (req,res) => {
-    console.log(req.body)
-    console.log(req.file)
+    //console.log(req.body)
+    //const imagename = req.file.filename
+    //console.log(imagename)
 })
 
 app.listen(3001, () => {
