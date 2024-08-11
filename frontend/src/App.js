@@ -60,16 +60,26 @@ function App() {
 //  upload file and send data to server
 
     const upload = () => {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+    
+      
       const formData = new FormData()
       formData.append('file', file)
-      axios.post('http://localhost:3001/upload', formData)
-      .then( res => {})
-      .catch( er => console.log(er))
 
       const imageName = file.name
+      
+      axios.post('http://localhost:3001/upload', formData)
+      .then( res => {
+        console.log('File uploaded successfully:', file.name);
+      })
+      .catch( er => console.log(er))
+
+
       handleAdd(imageName)
+
       const afile = document.querySelector('.file');
-      afile.value = '';
+      afile.value = ''; 
     } 
 
     
@@ -93,7 +103,7 @@ function App() {
   return (
     <>
     <div>
-      <input type="file" class="file" onChange={(e) => setFile(e.target.files[0])}></input>
+      <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
 
       <label className="text-sky-400">Name: </label>
       <input className='border-2 ' ref={bookRef} type='text'></input>
