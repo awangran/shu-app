@@ -4,6 +4,9 @@ import Library from './Library.js'
 import './output.css';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
+import Banner from './Banner.js';
 
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -102,7 +105,18 @@ function App() {
 
   return (
     <>
-    <div>
+    <div className='header'>
+      <h1>My Library</h1>
+
+      <div className='headerItems'>
+        <AddIcon fontSize="large"/>
+        <Brightness6Icon/>
+      </div>
+    </div>
+
+    <Banner/>
+
+    {/* <div id='bookAdd'>
       <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
 
       <label className="text-sky-400">Name: </label>
@@ -153,15 +167,15 @@ function App() {
       <label className='text-sky-400'>Rating: </label>
       <input type='number' min="0" max="10" ref={ratingRef}></input>
 
-
-
-      
-
       <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button>
-    </div>
+    </div> */}
 
-    <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
-    <div>{books.length} books in library</div>
+{/* render library */}
+
+  <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
+    {/* <div>{books.length} books in library</div>  */}
+
+
     </>
     
   );
