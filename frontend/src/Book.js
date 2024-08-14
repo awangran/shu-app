@@ -4,7 +4,6 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 export default function Book( {book, deleteBook, deleteItemById, editName} ) {
     function handleDelete() {
