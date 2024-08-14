@@ -7,6 +7,9 @@ import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Banner from './Banner.js';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import TextField from '@mui/material/TextField';
 
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -116,16 +119,41 @@ function App() {
 
     <Banner/>
 
-    {/* <div id='bookAdd'>
+    <div id='bookAdd'>
+
+      <div className='top' >
+      <CloseIcon />
+
+      </div>
+
+      <div className='wrapper' >
+
+        <div className='col-1'>
+
+          <TextField id="standard-basic" label="Name" variant="standard" color="secondary" ref={bookRef}/>
+          
+
+        </div>
+
+        <div className='col-2'>
+
+        </div>
+
+      </div>
+
+
+
+
+  {/*     
       <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
+ */}
 
-      <label className="text-sky-400">Name: </label>
-      <input className='border-2 ' ref={bookRef} type='text'></input>
+      
 
-      <label className="text-sky-400">Author: </label>
+{/*       <label className="">Author: </label>
       <input className='border-2 ' ref={authorRef} type='text'></input>
 
-      <label className="text-sky-400">Type: </label>
+      <label className="">Type: </label>
       <select id="type" ref={typeRef}>
         <option value="book">Book</option>
         <option value="webnovel">Webnovel</option>
@@ -136,7 +164,7 @@ function App() {
         <option value="movie">Movie</option>
       </select>
       
-      <label className='text-sky-400'>Genre: </label>
+      <label className=''>Genre: </label>
       <select id="genre" ref={genreRef} multiple>
         <option value="action">Action</option>
         <option value="adventure">Adventure</option>
@@ -157,18 +185,21 @@ function App() {
         <option value="psychological">Psychological</option>
       </select>
 
-      <label className='text-sky-400'>Status: </label>
+      <label className=''>Status: </label>
       <select id="status" ref={statusRef}>
         <option value="current">Current</option>
         <option value="completed">Completed</option>
         <option value="marinating">Marinating</option>
       </select>
 
-      <label className='text-sky-400'>Rating: </label>
+      <label className=''>Rating: </label>
       <input type='number' min="0" max="10" ref={ratingRef}></input>
 
-      <button className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button>
-    </div> */}
+      <button className='text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button> */}
+
+
+
+      </div> 
 
 {/* render library */}
 
