@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 import React, {useRef, useState} from 'react'
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+=======
+import React, {useRef} from 'react'
+>>>>>>> parent of fcfc8fa (book info hide display)
 
 export default function Book( {book, deleteBook, deleteItemById, editName} ) {
     function handleDelete() {
@@ -39,64 +43,16 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
             editName(book.id, newName, newAuthor, newType, newGenre, newStatus, newRating)
         }
     }
-
-    //hide and see book info on hover
-
-    const[hidden, setHidden] = useState(true);
-
     
   return (
     <>
-    <div className='bookWrapper'>
-      <div className="book"
-      onMouseEnter={() => setHidden(false)}
-      onMouseLeave={() => setHidden(true)}>
-      
+    <div className='book'>
     {/* <p>{book.name} | {book.author} | {book.type} | {book.genre} | {book.status} | {book.rating} | {book.image} </p> */}
       
     {/*   <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2" onClick={handleDelete}>delete</button>
       <button onClick={toggleEdit} className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2">edit</button>
  */}
-    
-      <div id='bookInfo' className={`hidden-element ${hidden ? '' : 'show'}`}>
-      
-      {hidden ? null : 
-        <>
-        <div className='label'>
-          <PersonOutlinedIcon/>
-          <p>{book.author}</p>
-        </div>
-
-        <div className='label'>
-          <StyleOutlinedIcon/>
-          <p>{book.genre}</p>
-        </div>
-
-        <div className='label'>
-          <CheckBoxOutlinedIcon/>
-          <p>{book.status}</p>
-        </div>
-
-        <div className='label'>
-          <StarBorderPurple500OutlinedIcon/>
-          <p>{book.rating}/10</p>
-        </div>
-
-        <div className='edit'>
-          <EditOutlinedIcon/>
-        </div>
-        </>
-        }
-
-      </div>
-      
-
     </div>
-
-    <p className='bookTitle'>{book.name}</p>
-
-    </div>
-    
 
 
     <div ref={settingRef} className='hidden' >

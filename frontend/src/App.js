@@ -297,14 +297,8 @@ function App() {
 
 {/* render library */}
 
-  <div className='library'>
-
-    <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
+  <Library books = {books} deleteItemById = {deleteItemById} editName={editName} />
     {/* <div>{books.length} books in library</div>  */}
-
-  </div>
-
-  
 
 
     </>
