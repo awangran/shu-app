@@ -9,7 +9,7 @@ import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Banner from './Banner.js';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -128,32 +128,16 @@ function App() {
 
       <div className='wrapper' >
 
-        <div className='col-1'>
+        <div className='col'>
+        <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
 
-          <TextField id="standard-basic" label="Name" variant="standard" color="secondary" ref={bookRef}/>
-          
+        <label className="">Name</label>
+        <input className='' ref={bookRef} type='text'></input>
 
-        </div>
+        <label className="">Author</label>
+        <input className='' ref={authorRef} type='text'></input>
 
-        <div className='col-2'>
-
-        </div>
-
-      </div>
-
-
-
-
-  {/*     
-      <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
- */}
-
-      
-
-{/*       <label className="">Author: </label>
-      <input className='border-2 ' ref={authorRef} type='text'></input>
-
-      <label className="">Type: </label>
+      <label className="">Type</label>
       <select id="type" ref={typeRef}>
         <option value="book">Book</option>
         <option value="webnovel">Webnovel</option>
@@ -163,39 +147,51 @@ function App() {
         <option value="manhua">Manhua</option>
         <option value="movie">Movie</option>
       </select>
-      
-      <label className=''>Genre: </label>
-      <select id="genre" ref={genreRef} multiple>
-        <option value="action">Action</option>
-        <option value="adventure">Adventure</option>
-        <option value="comedy">Comedy</option>
-        <option value="drama">Drama</option>
-        <option value="fantasy">Fantasy</option>
-        <option value="horror">Horror</option>
-        <option value="mystery">Mystery</option>
-        <option value="romance">Romance</option>
-        <option value="sci-fi">Science Fiction</option>
-        <option value="slice-of-life">Slice of Life</option>
-        <option value="sports">Sports</option>
-        <option value="supernatural">Supernatural</option>
-        <option value="thriller">Thriller</option>
-        <option value="mecha">Mecha</option>
-        <option value="historical">Historical</option>
-        <option value="musical">Musical</option>
-        <option value="psychological">Psychological</option>
-      </select>
 
-      <label className=''>Status: </label>
-      <select id="status" ref={statusRef}>
-        <option value="current">Current</option>
-        <option value="completed">Completed</option>
-        <option value="marinating">Marinating</option>
-      </select>
+          
 
-      <label className=''>Rating: </label>
-      <input type='number' min="0" max="10" ref={ratingRef}></input>
+        </div>
 
-      <button className='text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button> */}
+        <div className='col'>
+
+          <label className=''>Genre</label>
+          <select id="genre" ref={genreRef} multiple>
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="mystery">Mystery</option>
+            <option value="romance">Romance</option>
+            <option value="sci-fi">Science Fiction</option>
+            <option value="slice-of-life">Slice of Life</option>
+            <option value="sports">Sports</option>
+            <option value="supernatural">Supernatural</option>
+            <option value="thriller">Thriller</option>
+            <option value="mecha">Mecha</option>
+            <option value="historical">Historical</option>
+            <option value="musical">Musical</option>
+            <option value="psychological">Psychological</option>
+          </select>
+
+          <label className=''>Status</label>
+          <select id="status" ref={statusRef}>
+            <option value="current">Current</option>
+            <option value="completed">Completed</option>
+            <option value="marinating">Marinating</option>
+          </select>
+
+          <label className=''>Rating</label>
+          <input type='number' min="0" max="10" ref={ratingRef}></input>
+
+          <button className='add-btn' >Add book</button>
+
+
+        </div>
+
+      </div>
+
 
 
 
