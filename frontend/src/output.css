@@ -659,13 +659,16 @@ h1{
   border-radius: 30px;
 }
 
+.library{
+  display: flex;
+}
+
 .book{
-  background-color: #CCB7B7;
+  background-color: #e2cccc;
   width: 160px;
   height: 220px;
   margin: 20px 0px;
   border-radius: 20px;
-<<<<<<< HEAD
   padding: 10px 15px;
   display: flex;
   flex-direction: column;
@@ -773,6 +776,4 @@ h1{
 .addBtn{
   width: 15%;
   align-self: center;
-=======
->>>>>>> parent of fcfc8fa (book info hide display)
 }
