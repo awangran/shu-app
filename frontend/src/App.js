@@ -14,11 +14,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Rating from '@mui/material/Rating';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Divider } from '@mui/material';
 
 
 
@@ -31,6 +26,14 @@ function App() {
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
   const [file, setFile] = useState();
+
+  const bookRef = useRef()  
+  const authorRef = useRef()
+  const typeRef = useRef()
+  const genreRef = useRef()
+  const statusRef = useRef()
+  const ratingRef = useRef()
+  const imageRef = useRef()
 
   console.log(books)
 
@@ -51,23 +54,18 @@ function App() {
     const genre = Array.from(genreRef.current.selectedOptions, option => option.value)
     const status = statusRef.current.value
     const rating = ratingRef.current.value
-   
     const image = val
 
 
-
-
-
-
-    if (inputs === '') return
+    if (name === '') return
     setBooks(prevBooks => {
       return [...prevBooks, {id: id, name:name, author:author, type:type, genre:genre, status:status, rating:rating, image:image} ]
     });
 
 
-   bookRef.current.value = null
+    bookRef.current.value = null
     authorRef.current.value = null
-    ratingRef.current.value = null 
+    ratingRef.current.value = null
   
    
     };
@@ -149,31 +147,6 @@ function App() {
         typeof value === 'string' ? value.split(',') : value,
     );};
 
-    const [status, setStatus] = React.useState('');
-
-    const handleChange3 = (event) => {
-      setStatus(event.target.value);
-    };
-
-    const [value, setValue] = React.useState(2);
-
-    const VisuallyHiddenInput = styled('input')({
-      clip: 'rect(0 0 0 0)',
-      clipPath: 'inset(50%)',
-      height: 1,
-      overflow: 'hidden',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      whiteSpace: 'nowrap',
-      width: 1,
-    });
-
-
-    function toggleVisibility() {
-      const div = document.getElementById('bookAdd')
-      div.style.display = div.style.display === "none" ? "flex" : "none";
-  } 
     
    
 
@@ -182,8 +155,8 @@ function App() {
     <div className='header'>
       <h1>My Library</h1>
 
-      <div className='headerItems'> 
-        <AddIcon fontSize="large" onClick={toggleVisibility} />
+      <div className='headerItems'>
+        <AddIcon fontSize="large"/>
         <Brightness6Icon/>
       </div>
     </div>
@@ -193,25 +166,18 @@ function App() {
     <div id='bookAdd'>
 
       <div className='top' >
-      <CloseIcon onClick={toggleVisibility} />
+      <CloseIcon />
 
       </div>
 
       <div className='wrapper' >
 
-        <div className='col'>
-               
+        <div className='col-1'>
 
-          <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
-
-
-          <TextField style={{margin: '30px 0 0 0'}} className='col-item' label="Name" variant="standard" color="secondary" onChange={(e) => setName()}/>
-
-          <TextField style={{margin: '30px 0px'}} className='col-item' label="Author" variant="standard" color="secondary" inputRef={authorRef}/>
-
-          <InputLabel id="typelabel">Type</InputLabel>
+          <TextField id="standard-basic" label="Name" variant="standard" color="secondary" ref={bookRef}/>
+          <TextField id="standard-basic" label="Author" variant="standard" color="secondary" ref={authorRef}/>
+          <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
-              className='col-item'
               label="Type"
               ref={typeRef} 
               value={type}
@@ -231,11 +197,10 @@ function App() {
 
         </div>
 
-        <div className='col'>
+        <div className='col-2'>
 
           <InputLabel id="genre-label">Genre</InputLabel>
             <Select
-              className='col-item'
               labelId="genre-label"
               id="genre"
               multiple
@@ -255,43 +220,38 @@ function App() {
             </Select>
 
 
-        <InputLabel id="status">Status</InputLabel>
-            <Select
-              className='col-item'
-              label="status"
-              ref={statusRef} 
-              value={status}
-              onChange={handleChange3}
-              color="secondary"
-            >
-              <MenuItem value="current">Current</MenuItem>
-              <MenuItem value="completed">Completed</MenuItem>
-              <MenuItem value="marinating">Marinating</MenuItem>
-            </Select>
-            
-            <Rating
-              className='col-item'
-              name="rating"
-              value={value}
-              size="large"
-              precision={0.5}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              ref={ratingRef}
-            />
-
-
-           
-
-
 
         </div>
 
       </div>
 
 
-      <Button className="addBtn" variant="outlined" color="secondary" onClick={upload}>Add Book</Button>
+
+
+  {/*     
+      <input id="fileInput" type="file" className="file" onChange={(e) => setFile(e.target.files[0])}></input>
+ */}
+
+      
+
+{/*    
+
+     
+    
+
+      <label className=''>Status: </label>
+      <select id="status" ref={statusRef}>
+        <option value="current">Current</option>
+        <option value="completed">Completed</option>
+        <option value="marinating">Marinating</option>
+      </select>
+
+      <label className=''>Rating: </label>
+      <input type='number' min="0" max="10" ref={ratingRef}></input>
+
+      <button className='text-white py-1 px-2 rounded m-2' onClick={upload}>Add book</button> */}
+
+
 
       </div> 
 

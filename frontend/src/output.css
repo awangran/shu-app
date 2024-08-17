@@ -751,29 +751,3 @@ h1{
   transition: .5s;
   color:#714B4B ;
 }
-
-/* add book css*/
-
-.wrapper{
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  place-items: center;
-  margin: 30px;
-}
-
-.col{
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-}
-
-.col-item{
-  margin: 20px 0px
-}
-
-
-.addBtn{
-  width: 15%;
-  align-self: center;
-}
