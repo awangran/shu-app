@@ -10,12 +10,6 @@ import Banner from './Banner.js';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-
-
 
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -109,44 +103,6 @@ function App() {
         book.id === itemId ? { ...book, name: newName, author: newAuthor, type: newType, genre: newGenre, status: newStatus, rating: newRating} : book));
       };
 
-
-      const [type, setType] = React.useState('');
-
-      const handleChange = (event) => {
-        setType(event.target.value);
-      };
-
-      const names = [
-        'Action',
-        'Adventure',
-        'Comedy',
-        'Drama',
-        'Fantasy',
-        'Horror',
-        'Mystery',
-        'Romance',
-        'Science Fiction',
-        'Slife of Life',
-        'Sports',
-        'Supernatural',
-        'Thriller',
-        'Mecha',
-        'Historical',
-        'Musical',
-        'Psychological'
-      ];
-
-      const [genreName, setGenreName] = React.useState([]);
-
-      const handleChange2 = (event) => {
-        const {
-        target: { value },
-      } = event;
-        setGenreName(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-    );};
-
     
    
 
@@ -175,51 +131,11 @@ function App() {
         <div className='col-1'>
 
           <TextField id="standard-basic" label="Name" variant="standard" color="secondary" ref={bookRef}/>
-          <TextField id="standard-basic" label="Author" variant="standard" color="secondary" ref={authorRef}/>
-          <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              label="Type"
-              ref={typeRef} 
-              value={type}
-              onChange={handleChange}
-              color="secondary"
-
-            >
-              <MenuItem value="book">Book</MenuItem>
-              <MenuItem value="webnovel">Webnovel</MenuItem>
-              <MenuItem value="anime">Anime</MenuItem>
-              <MenuItem value="manga">Manga</MenuItem>
-              <MenuItem value="manwha">Manwha</MenuItem>
-              <MenuItem value="manhua">Manhua</MenuItem>
-              <MenuItem value="movie">Movie</MenuItem>
-            </Select>
-
+          
 
         </div>
 
         <div className='col-2'>
-
-          <InputLabel id="genre-label">Genre</InputLabel>
-            <Select
-              labelId="genre-label"
-              id="genre"
-              multiple
-              value={genreName}
-              onChange={handleChange2}
-              input={<OutlinedInput label="Genre" />}
-              ref={genreRef}
-            >
-              {names.map((genre) => (
-                <MenuItem
-                  key={genre}
-                  value={genre}
-                >
-                  {genre}
-                </MenuItem>
-              ))}
-            </Select>
-
-
 
         </div>
 
@@ -234,10 +150,40 @@ function App() {
 
       
 
-{/*    
+{/*       <label className="">Author: </label>
+      <input className='border-2 ' ref={authorRef} type='text'></input>
 
-     
-    
+      <label className="">Type: </label>
+      <select id="type" ref={typeRef}>
+        <option value="book">Book</option>
+        <option value="webnovel">Webnovel</option>
+        <option value="anime">Anime</option>
+        <option value="manga">Manga</option>
+        <option value="manhwa">Manhwa</option>
+        <option value="manhua">Manhua</option>
+        <option value="movie">Movie</option>
+      </select>
+      
+      <label className=''>Genre: </label>
+      <select id="genre" ref={genreRef} multiple>
+        <option value="action">Action</option>
+        <option value="adventure">Adventure</option>
+        <option value="comedy">Comedy</option>
+        <option value="drama">Drama</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="horror">Horror</option>
+        <option value="mystery">Mystery</option>
+        <option value="romance">Romance</option>
+        <option value="sci-fi">Science Fiction</option>
+        <option value="slice-of-life">Slice of Life</option>
+        <option value="sports">Sports</option>
+        <option value="supernatural">Supernatural</option>
+        <option value="thriller">Thriller</option>
+        <option value="mecha">Mecha</option>
+        <option value="historical">Historical</option>
+        <option value="musical">Musical</option>
+        <option value="psychological">Psychological</option>
+      </select>
 
       <label className=''>Status: </label>
       <select id="status" ref={statusRef}>
