@@ -732,7 +732,7 @@ h1{
   top: 0;
   left: 0;
   padding: 10%;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 

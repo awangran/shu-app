@@ -103,6 +103,13 @@ function App() {
         book.id === itemId ? { ...book, name: newName, author: newAuthor, type: newType, genre: newGenre, status: newStatus, rating: newRating} : book));
       };
 
+    //toggle add
+
+    const toggleAdd = () => {
+      const x = document.getElementById('bookAdd')
+      x.style.display = x.style.display === "none" ? "flex" : "none";
+
+    }
     
    
 
@@ -112,7 +119,7 @@ function App() {
       <h1>My Library</h1>
 
       <div className='headerItems'>
-        <AddIcon fontSize="large"/>
+        <AddIcon fontSize="large" onClick={toggleAdd}/>
         <Brightness6Icon/>
       </div>
     </div>
@@ -122,7 +129,7 @@ function App() {
     <div id='bookAdd'>
 
       <div className='top' >
-      <CloseIcon />
+      <CloseIcon onClick={toggleAdd} />
 
       </div>
 
@@ -185,15 +192,12 @@ function App() {
           <label className=''>Rating</label>
           <input type='number' min="0" max="10" ref={ratingRef}></input>
 
-          <button className='add-btn' >Add book</button>
+          <button className='add-btn' onClick={upload}>Add book</button>
 
 
         </div>
 
       </div>
-
-
-
 
       </div> 
 
