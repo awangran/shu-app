@@ -24,3 +24,7 @@ app.post('/upload', upload.single('file'), (req,res) => {
     //const imagename = req.file.filename
     //console.log(imagename)
 })
+
+app.listen(port, () => {
+    console.log('Server is running....')
+})
