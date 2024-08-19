@@ -67,12 +67,12 @@ function App() {
       const file = fileInput.files[0];
     
       
-      const formData = new FormData()
+      const formData = new FormData() 
       formData.append('file', file)
 
       const imageName = file.name
       
-      axios.post('http://localhost:3001/upload', formData)
+      axios.post('https://shu-app-backend.onrender.com', formData)
       .then( res => {
         console.log('File uploaded successfully:', file.name);
       })
