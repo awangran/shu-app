@@ -4,24 +4,31 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function Book( {book, deleteBook, deleteItemById, editName} ) {
-    function handleDelete() {
-        deleteItemById(book.id)
-    }
 
-     function toggleEdit() {
-        const btn = settingRef.current
-        btn.className = (btn.className === "block") ? "hidden" : "block";
-    } 
+export default function Book( {book, deleteItemById, editName} ) {
+    
 
+    const editRef = useRef()
     const nameRef = useRef()
     const authoreditRef = useRef()
-    const settingRef = useRef()
     const editTypeRef = useRef()
     const editGenreRef = useRef()
     const editStatusRef = useRef()
     const editRatingRef = useRef()
+
+    function handleDelete() {
+      deleteItemById(book.id)
+  }
+
+    const toggleEdit = () => {
+      const x = editRef.current
+      x.style.display = x.style.display === "none" ? "flex" : "none";
+
+      
+    }
     
 
     const handleEdit = (event) => {
@@ -44,13 +51,20 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
 
     const[hidden, setHidden] = useState(true);
 
+
+    const cover = '/assets/images/' + book.image
+    
     
   return (
     <>
     <div className='bookWrapper'>
-      <div className="book"
+
+      <div className="book" 
       onMouseEnter={() => setHidden(false)}
-      onMouseLeave={() => setHidden(true)}>
+      onMouseLeave={() => setHidden(true)}
+      style={{backgroundImage:`url(${cover})`}}
+      >
+
       
     {/* <p>{book.name} | {book.author} | {book.type} | {book.genre} | {book.status} | {book.rating} | {book.image} </p> */}
       
@@ -83,7 +97,9 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         </div>
 
         <div className='edit'>
-          <EditOutlinedIcon/>
+          <span><EditOutlinedIcon onClick={toggleEdit}/></span>
+          <span><DeleteOutlineOutlinedIcon onClick={handleDelete}/></span>
+          
         </div>
         </>
         }
@@ -96,17 +112,28 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
     <p className='bookTitle'>{book.name}</p>
 
     </div>
-    
 
 
-    <div ref={settingRef} className='hidden' >
-        <label>name:</label>
-        <input defaultValue = {book.name} className='border-2' ref={nameRef} type='text'  ></input>
+
+
+    <div id='bookEdit' ref={editRef}>
+
+      <div className='top' >
+        <h1>Edit Book</h1>
+        <CloseIcon onClick={toggleEdit}/>
+      </div>
+
+      <div className='wrapper' >
+
+        <div className='col'>
+
+        <label>Name</label>
+        <input defaultValue = {book.name} ref={nameRef} type='text'  ></input>
         
-        <label>author:</label>
-        <input defaultValue = {book.author} className='border-2' ref={authoreditRef} type='text' ></input>
+        <label>Author</label>
+        <input defaultValue = {book.author} ref={authoreditRef} type='text' ></input>
 
-        <label>type:</label>
+        <label>Type</label>
         <select id="type" ref={editTypeRef}>
         <option value="book">Book</option>
         <option value="webnovel">Webnovel</option>
@@ -117,7 +144,14 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         <option value="movie">Movie</option>
       </select>
 
-      <label className='text-sky-400'>Genre: </label>
+
+      <button onClick={handleEdit} className='add-btn'>save</button> 
+
+        </div>
+
+        <div className='col'>
+
+        <label className=''>Genre: </label>
       <select id="genre" ref={editGenreRef} multiple>
         <option value="action">Action</option>
         <option value="adventure">Adventure</option>
@@ -138,23 +172,28 @@ export default function Book( {book, deleteBook, deleteItemById, editName} ) {
         <option value="psychological">Psychological</option>
       </select>
 
-      <label className='text-sky-400'>Status: </label>
+      <label className=''>Status: </label>
       <select id="status" ref={editStatusRef}>
         <option value="current">Current</option>
         <option value="completed">Completed</option>
         <option value="marinating">Marinating</option>
       </select>
 
-      <label className='text-sky-400'>Rating: </label>
+      <label className=''>Rating: </label>
       <input type='number' min="0" max="10" ref={editRatingRef}></input>
 
+         
+      <button onClick={toggleEdit} className='add-btn'>cancel</button>
 
-        
-        
-        <button onClick={handleEdit} className='bg-blue-500 over:bg-blue-700 text-white py-1 px-2 rounded m-2'>save</button> 
 
-        <button onClick={toggleEdit} className='bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded m-2'>cancel</button> 
+
+        </div>
+
       </div>
+
+      </div> 
+
+  
 
     </>
 

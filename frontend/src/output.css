@@ -661,6 +661,9 @@ h1{
 
 .library{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center
+  
 }
 
 .book{
@@ -669,9 +672,15 @@ h1{
   height: 220px;
   margin: 20px 0px;
   border-radius: 20px;
-  padding: 10px 15px;
   display: flex;
   flex-direction: column;
+  background-size: cover ;
+  align-items: center;
+  justify-content: center;
+}
+
+.book:hover{
+  background-image: none;
 }
 
 .bookTitle{
@@ -704,7 +713,7 @@ h1{
   color: #714B4B;
 }
 
-.edit:hover{
+.edit span:hover{
   transition: .2s;
   color: #fcfcfc;
 }
@@ -712,6 +721,12 @@ h1{
 #bookInfo{
   display: flex;
   flex-direction: column;
+  background-color: #e2cccc;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  padding: 10px;
+
 }
 
 .hidden-element {
@@ -736,9 +751,22 @@ h1{
   flex-direction: column;
 }
 
+#bookEdit{
+  background-color: #ECD0D0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 55;
+  top: 0;
+  left: 0;
+  padding: 10%;
+  display: none;
+  flex-direction: column;
+}
+
 .top{
   display: flex;
-  place-content: end;
+  place-content: space-around;
 }
 
 .top svg{
@@ -755,7 +783,7 @@ h1{
 .wrapper{
   display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     justify-content: space-evenly;
 }
 

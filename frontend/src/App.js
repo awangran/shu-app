@@ -7,9 +7,9 @@ import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Banner from './Banner.js';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
+
 
 
 const LOCAL_STORAGE_KEY = 'shu.books'
@@ -37,9 +37,6 @@ function App() {
   }, [books]) 
 
 
-
-
-  
   function handleAdd(val) {
     const id = uuidv4()
     const name = bookRef.current.value
@@ -111,6 +108,23 @@ function App() {
 
     }
     
+
+    //toggle dark and light mode
+
+    const [mode, setMode] = useState(() => localStorage.getItem('mode') || 'light');
+
+      useEffect(() => {
+        document.body.style.backgroundColor = mode === 'light' ? '#ffffff' : '#1e1e1e';
+        localStorage.setItem('mode', mode);
+      }, [mode]);
+
+      const toggleMode = () => {
+        const newMode = mode === 'light' ? 'dark' : 'light';
+        setMode(newMode); 
+      };
+
+
+
    
 
   return (
@@ -120,7 +134,7 @@ function App() {
 
       <div className='headerItems'>
         <AddIcon fontSize="large" onClick={toggleAdd}/>
-        <Brightness6Icon/>
+        <Brightness6Icon onClick={toggleMode}/>
       </div>
     </div>
 
@@ -129,6 +143,7 @@ function App() {
     <div id='bookAdd'>
 
       <div className='top' >
+      <h1>Add Book</h1>
       <CloseIcon onClick={toggleAdd} />
 
       </div>
